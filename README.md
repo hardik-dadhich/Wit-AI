@@ -10,5 +10,10 @@ How to setup this project on ubuntu:
 - then finally run the command `python manage.py runserver`.
 
 <hr>
-## In case if you stuck :
+## In case if you stuck: <br>
 refer https://github.com/pypa/pipenv/issues/2608
+
+<br>
+#First View
+- Login page with Facebook and twitter Option:
+![image](static/images/login-view.png)
