@@ -15,5 +15,6 @@ refer https://github.com/pypa/pipenv/issues/2608
 
 <br>
 #First View
-- Login page with Facebook and twitter Option:
+- Login page with Facebook and twitter Option
+
 ![image](static/images/login-view.png)
