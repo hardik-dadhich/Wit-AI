@@ -11,21 +11,23 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+from configparser import ConfigParser
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+config = ConfigParser()
+config.read('settings.ini')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'o$qvaw+=p_i@sfm-dyfb8idz3a^h=scqhoc4d-m=@^l__l5z)_'
+
+SECRET_KEY = config.get('settings', 'SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,9 +43,10 @@ DJANGO_APPS = [
 PROJECT_APPS = [
     "users.apps.UsersConfig",
 ]
-THIRD_PARTY_APPS = []
 
-INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
+THIRD_PARTY_APPS = ['social_django']
+
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,11 +56,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 # authentication for Facebook logon
 AUTHENTICATION_BACKENDS = [
-    'social_core.backends.instagram.InstagramOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
@@ -75,6 +79,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -134,3 +140,11 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 #sAUTH_USER_MODEL = "users.User"
+
+SOCIAL_AUTH_TWITTER_KEY = config.get("settings", 'SOCIAL_AUTH_TWITTER_KEY')
+SOCIAL_AUTH_TWITTER_SECRET = config.get(
+    "settings", 'SOCIAL_AUTH_TWITTER_SECRET')
+
+LOGIN_URL = 'login/'
+LOGOUT_URL = 'logout/'
+LOGOUT_REDIRECT_URL = 'home/'

@@ -2,6 +2,7 @@
 
  {% extends 'base.html' %}
  {% block title %} Sign in {% endblock %}
+ 
  {% block content %}
 	<div class="limiter">
 		<div class="container-login100">
@@ -17,7 +18,7 @@
 							Login with Facebook
 						</a>
 
-						<a href="#" class="btn-login-with bg2">
+						<a href="{% url 'social:begin' 'twitter' %}" class="btn-login-with bg2">
 							<i class="fa fa-twitter"></i>
 							Login with Twitter
 						</a>

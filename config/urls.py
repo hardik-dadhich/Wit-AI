@@ -17,12 +17,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-# from users import urls as users_url
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("users.urls", namespace="users")),
+
+    # Authentication
+    path("login/", LoginView.as_view(template_name='users/home.html'), name='login'),
+    path("logout/", LogoutView.as_view(next_page='home'), name='logout'),
+    path("oauth/", include('social_django.urls', namespace='social')),
 ]
+
 
 # It means we are in debug mode
 if settings.DEBUG:

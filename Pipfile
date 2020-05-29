@@ -35,6 +35,8 @@ typed-ast = "==1.4.1"
 wrapt = "==1.12.1"
 zipp = "==3.1.0"
 Django = "==3.1a1"
+social-auth-app-django = "*"
+python-decouple = "*"
 
 [requires]
 python_version = "3.7"

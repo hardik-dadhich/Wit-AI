@@ -117,3 +117,4 @@ dmypy.json
 
 # mac
 .DS_Store
+settings.ini
