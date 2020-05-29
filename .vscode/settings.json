@@ -1,4 +1,4 @@
 {
-  "python.pythonPath": "/Users/hardikdadhich/.local/share/virtualenvs/Wit-Ai-YksPttxR/bin/python",
+  "python.pythonPath": "/home/ankush/.local/share/virtualenvs/Wit-AI-2n9PBssV/bin/python",
   "python.linting.flake8Args": ["--max-line-lenght==88"]
 }
