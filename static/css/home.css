@@ -12,6 +12,7 @@
 .card img{
     height: 250px;
     width: 100%
+<<<<<<< HEAD
 }
 
 .row {
@@ -63,4 +64,6 @@
     transform: rotateY(180deg);
     font-size: 40px;
 
+=======
+>>>>>>> 6c6866ec2a24ead6be1d28db0dde37fb20e3b017
 }
