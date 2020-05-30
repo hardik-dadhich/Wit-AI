@@ -1,12 +1,152 @@
 <!-- templates/home.html -->
 
 {% extends 'base.html' %}
+{% load static %}
+
 {% block title %} Home {% endblock %}
 {% block content %}
-<div class="row">
-    <div class="col-sm-12 mb-3">
-    <h1> Hi <h1>
-        <h4 class="text-center"> Welcome {{ user.username }} </h4>
+<head>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<nav class="navbar navbar-light">
+    <h4 class="text-center"> Welcome {{ user.username }} </h4>
+</nav>
+<div class="row row-cols-1 row-cols-md-3" >
+    <div class="col mb-4">
+      
+      <div class="card"> 
+          
+          <div class="card-inner"> 
+              <div class="card-front"> 
+                  <img src= "{% static "images/Sports.jpg" %}"
+                          style="width:100%;height:100%;"> 
+              </div> 
+                
+              <div class="card-back"> 
+                <h3>Sports</h3>
+                <br>
+                  <p>Talk to WIT about sports</p> 
+                    
+                  <a class="btn btn-primary" href="https://www.google.com" role="button">Click!</a>
+              </div> 
+          </div> 
+      </div>  
     </div>
-</div>
+
+  <div class="col mb-4">
+      <div class="card">
+        <div class="card-inner"> 
+              <div class="card-front"> 
+                  <img src= "{% static "images/Movies.png" %}"
+                          style="width:100%;height:100%;"> 
+              </div> 
+                
+              <div class="card-back"> 
+                <h3>Movies</h3>
+                <br>
+                  <p>To get the information about all movies </p> 
+                    
+                  <a class="btn btn-primary" href="https://www.google.com" role="button">Click!</a>
+              </div> 
+          </div>
+      </div>
+    </div>
+
+  <div class="col mb-4">
+      <div class="card">
+        <div class="card-inner"> 
+              <div class="card-front"> 
+                  <img src= "{% static "images/Social.jpg" %}"
+                          style="width:100%;height:100%;"> 
+              </div> 
+                
+              <div class="card-back"> 
+                <h3>Social</h3>
+                <br>
+                  <p>Get updates regarding to social media</p> 
+                    
+                  <a class="btn btn-primary" href="https://www.google.com" role="button">Click!</a>
+              </div> 
+          </div>
+      </div>
+    </div>
+
+
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-inner"> 
+              <div class="card-front"> 
+                  <img src= "{% static "images/News.jpg" %}"
+                          style="width:100%;height:100%;"> 
+              </div> 
+                
+              <div class="card-back"> 
+                <h3>News</h3>
+                <br>
+                  <p>Get the latest updates from WIT.</p> 
+                    
+                  <a class="btn btn-primary" href="https://www.google.com" role="button">Click!</a>
+              </div> 
+          </div>
+      </div>
+    </div>
+
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-inner"> 
+              <div class="card-front"> 
+                  <img src= "{% static "images/Stocks.jpeg" %}"
+                          style="width:100%;height:100%;"> 
+              </div> 
+                
+              <div class="card-back"> 
+                <h3>Stocks</h3>
+                <br>
+                  <p>Talk to WIT about the Market status.</p> 
+                    
+                  <a class="btn btn-primary" href="https://www.google.com" role="button">Click!</a>
+              </div> 
+          </div>
+      </div>
+    </div>
+
+    <div class="col mb-4">
+        <div class="card">
+            <div class="card-inner"> 
+                <div class="card-front"> 
+                    <img src= "{% static "images/Music.jpeg" %}"
+                            style="width:100%;height:100%;"> 
+                </div> 
+                    
+                <div class="card-back"> 
+                    <h3>Music</h3>
+                    <br>
+                    <p>Shows the music of your interest.</p> 
+                        
+                    <a class="btn btn-primary" href="https://www.google.com" role="button">Click!</a>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col mb-4">
+        <div class="card">
+          <div class="card-inner"> 
+                <div class="card-front"> 
+                    <img src= "{% static "images/Games.jpeg" %}"
+                            style="width:100%;height:100%;"> 
+                </div> 
+                  
+                <div class="card-back"> 
+                  <h3>Games</h3>
+                  <br>
+                    <p>Shows the games in which you are interested.</p> 
+                      
+                    <a class="btn btn-primary" href="https://www.google.com" role="button">Click!</a>
+                </div> 
+            </div>
+        </div>
+      </div>
+  </div>
 {% endblock %}
