@@ -1,0 +1,15 @@
+.navbar{
+    height: 80px;
+    background-color: #35719c;
+}
+
+
+.navbar img{
+    width: 40px;
+    height: 40px
+}
+
+.card img{
+    height: 250px;
+    width: 100%
+}
