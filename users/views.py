@@ -2,17 +2,29 @@ from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 from django.contrib.auth.decorators import login_required
+from django.contrib.sessions.models import Session
+from django.contrib.auth import logout
+# from social_auth.utils import dsa_urlopen
 # from . import forms
 # Create your views here.
 
 
 def home(request):
+    request.session['is_login'] = True
     return render(request, "users/login.html", {})
 
 
 @login_required
 def afterlogin(request):
-    return render(request, "users/home.html", {})
+
+    if request.session.has_key("is_login"):
+        return render(request, "users/home.html", {})
+    return redirect('login')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 
 def SignUpView(request):

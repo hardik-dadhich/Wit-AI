@@ -7,5 +7,5 @@ app_name = "users"
 
 urlpatterns = [
     path("", user_view.home, name='home'),
-    path("accounts/profile/", user_view.afterlogin, name='afterlogin')
+    path("accounts/profile/", user_view.afterlogin, name='afterloginpage')
 ]
