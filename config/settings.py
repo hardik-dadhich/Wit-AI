@@ -148,3 +148,15 @@ SOCIAL_AUTH_TWITTER_SECRET = config.get(
 LOGIN_URL = 'login/'
 LOGOUT_URL = 'logout/'
 LOGOUT_REDIRECT_URL = 'home/'
+
+TWITTER_EXTRA_DATA = [('profile_image_url', 'profile_picture')]
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_auth.backends.pipeline.social.social_auth_user',
+    'social_auth.backends.pipeline.associate.associate_by_email',
+    'social_auth.backends.pipeline.user.get_username',
+    'social_auth.backends.pipeline.user.create_user',
+    'social_auth.backends.pipeline.social.associate_user',
+    'social_auth.backends.pipeline.user.update_user_details',
+    'auth_pipelines.pipelines.get_user_avatar',
+)
