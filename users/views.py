@@ -13,7 +13,14 @@ config.read('./settings.ini')
 # Create your views here.
 
 
+# def home(request):
+#     if request.session.has_key('is_login'):
+#         return redirect('users:afterloginpage')
+#     else:
+#         request.session['is_login'] = True
+#         return render(request, "users/login.html", {})
 def home(request):
+
     request.session['is_login'] = True
     return render(request, "users/login.html", {})
 
@@ -56,31 +63,40 @@ def findPeople(request):
     response = requests.get(
         f'https://api.twitter.com/1.1/friends/list.json?cursor=-1&screen_name={username}&skip_status=true&include_user_entities=false', headers=headers)
     data = response.json()
-    friends_name = [i['name'] for i in data['users']]
-    total_friends = len(friends_name)
+    if 'users' in data:
+        friends_name = [i['name'] for i in data['users']]
+        total_friends = len(friends_name)
 
-    return render(request, "users/meetfriends.html", {'friends_name': friends_name, 'user': username, 'total_friends': total_friends})
+        return render(request, "users/meetfriends.html", {'friends_name': friends_name, 'user': username, 'total_friends': total_friends})
+    else:
+        return render(request, "users/meetfriends.html", {'friends_name': "NO USER FRIEND", 'user': username, 'total_friends': 0})
 
-@login_required
+
+@ login_required
 def games(request):
     return render(request, "users/games.html", {})
 
-@login_required
+
+@ login_required
 def movies(request):
     return render(request, "users/movies.html", {})
 
-@login_required
+
+@ login_required
 def music(request):
     return render(request, "users/music.html", {})
 
-@login_required
+
+@ login_required
 def news(request):
     return render(request, "users/news.html", {})
 
-@login_required
+
+@ login_required
 def social(request):
     return render(request, "users/social.html", {})
 
-@login_required
+
+@ login_required
 def sports(request):
     return render(request, "users/sports.html", {})
