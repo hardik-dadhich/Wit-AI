@@ -1,5 +1,4 @@
 """config URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
 Examples:
@@ -26,7 +25,7 @@ urlpatterns = [
 
     # Authentication
     path("login/", LoginView.as_view(template_name='users/home.html'), name='login'),
-    path("logout/", LogoutView.as_view(next_page='home'), name='logout'),
+    path("logout/", LogoutView.as_view(next_page='/'), name='logout'),
     path("oauth/", include('social_django.urls', namespace='social')),
 ]
 
