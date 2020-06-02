@@ -60,3 +60,27 @@ def findPeople(request):
     total_friends = len(friends_name)
 
     return render(request, "users/meetfriends.html", {'friends_name': friends_name, 'user': username, 'total_friends': total_friends})
+
+@login_required
+def games(request):
+    return render(request, "users/games.html", {})
+
+@login_required
+def movies(request):
+    return render(request, "users/movies.html", {})
+
+@login_required
+def music(request):
+    return render(request, "users/music.html", {})
+
+@login_required
+def news(request):
+    return render(request, "users/news.html", {})
+
+@login_required
+def social(request):
+    return render(request, "users/social.html", {})
+
+@login_required
+def sports(request):
+    return render(request, "users/sports.html", {})
