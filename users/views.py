@@ -14,6 +14,7 @@ config.read('./settings.ini')
 
 
 def home(request):
+    request.session['is_login'] = True
     return render(request, "users/login.html", {})
 
 
