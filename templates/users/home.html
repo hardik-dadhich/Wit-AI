@@ -8,15 +8,7 @@
 <head>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
-<nav class="navbar navbar-light">
-    <h4 class="text-center"> Welcome <font color="white"> {{ user.username }} </font> </h4>
-    
-    <div class="pull-right">
-        <a href="{% url 'logout' %}" class="btn btn-danger btn-lg">
-            <span class="glyphicon glyphicon-log-out"></span> <font color="black">Log out </font>
-        </a>                
-    </div>
-</nav>
+
 <div class="row row-cols-1 row-cols-md-3" >
     <div class="col mb-4">
       
