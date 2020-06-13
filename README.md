@@ -25,4 +25,4 @@ refer https://github.com/pypa/pipenv/issues/2608
 
 # third view (Find your twiiter frinds)
 
-![image](static/image/friends.png)
+![image](static/images/friends.png)
