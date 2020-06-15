@@ -27,6 +27,6 @@ refer https://github.com/pypa/pipenv/issues/2608
 
 ![image](static/images/friends.png)
 
-# fourth view (talk with through speech)
+# fourth view (talk with wit through speech)
 
 ![image](static/images/speech.png)
