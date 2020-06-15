@@ -23,6 +23,10 @@ refer https://github.com/pypa/pipenv/issues/2608
 
 ![image](static/images/cards.png)
 
-# third view (Find your twiiter frinds)
+# third view (Find your twiter friends)
 
 ![image](static/images/friends.png)
+
+# fourth view (talk with through speech)
+
+![image](static/images/speech.png)
