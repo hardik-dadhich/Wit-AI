@@ -13,9 +13,13 @@
 					</span>
 
 					<div>
-						<a href="{% url 'social:begin' 'facebook' %}" class="btn-login-with bg1 m-b-10">
+						<a href="#" class="btn-login-with bg1 m-b-10">
 							<i class="fa fa-facebook-official"></i>
 							Login with Facebook
+							<fb:login-button 
+								scope="public_profile,email"
+								onlogin="checkLoginState();">
+							</fb:login-button>
 						</a>
 
 						<a href="{% url 'social:begin' 'twitter' %}" class="btn-login-with bg2">

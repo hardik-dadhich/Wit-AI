@@ -41,7 +41,7 @@ PROJECT_APPS = [
     "users.apps.UsersConfig",
 ]
 
-THIRD_PARTY_APPS = ['social_django']
+THIRD_PARTY_APPS = ['social_django', 'pyaudio', 'mpyg321', 'gtts']
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
@@ -152,6 +152,9 @@ LOGOUT_URL = 'logout/'
 LOGOUT_REDIRECT_URL = 'home/'
 
 TWITTER_EXTRA_DATA = [('profile_image_url', 'profile_picture')]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # SOCIAL_AUTH_PIPELINE = (
 #     'social_auth.backends.pipeline.social.social_auth_user',
