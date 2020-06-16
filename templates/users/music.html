@@ -1,1 +1,30 @@
-<h2>Hello Music!!!!</h2>
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Talk about Music {% endblock %}	
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/games.css' %}">	
+<script src="{% static 'js/games.js' %}"></script>	
+
+
+		<div class="container">
+			<div class="container" width="400">
+				<img src="{% static 'images/talking_dog.gif' %}" width="700" height="500" />
+			</div>
+			<div class="controls">	
+				<form method='POST' action=>
+					{% csrf_token %}
+					<button type='submit' >
+						<a id="save">
+							<img id="record" src="{% static 'js/mic128.png' %}" onclick='start(0)'>
+						</a>
+					</button>
+				</form>	
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+				<div class="progress-bar" id="progressBar" value="0" max="100">
+					<span class="progress-bar-fill" style="width: 30%"></span>
+				</div>
+			</div>
+		</div>
+{% endblock %}
