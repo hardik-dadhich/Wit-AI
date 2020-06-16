@@ -18,3 +18,15 @@ refer https://github.com/pypa/pipenv/issues/2608
 - Login page with Facebook and twitter Option
 
 ![image](static/images/login-view.png)
+
+# Second view (Cards/different options)
+
+![image](static/images/cards.png)
+
+# third view (Find your twiter friends)
+
+![image](static/images/friends.png)
+
+# fourth view (talk with wit through speech)
+
+![image](static/images/speech.png)

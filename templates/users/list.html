@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Based on Minimal Django File Upload Example</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    </head>
+    <body>
+        {% load static %}
+        {% comment %} <script src="{% static "alert.js" %}"></script> {% endcomment %}
+        <!-- List of uploaded recordings -->
+        {# recordings = Recording.objects.all() #}
+        {% if recordings %}
+            <ul>
+            {% for recording in recordings %}
+                <li>
+                {# TODO use <audio controls src="mysound.ogg"></audio> #}
+                    <a href="{{ recording.audiofile.url }}">
+                        {{ recording.audiofile.name }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No recordings.</p>
+        {% endif %}
+
+        <!-- Upload form. Note enctype attribute! -->
+        {# url "list" gives us /v1/list, bc "list" is the @name of that route in v1.urls.py #}
+        <form action="{% url 'users:lists' %}" method="post" enctype="multipart/form-data">
+
+            {# In any template that uses a POST form, use the csrf_token tag inside the #}
+            {# <form> element if the form is for an internal URL to protect you from #}
+            {# "Cross Site Request Forgeries" [docs.djangoproject.com/en/dev/ref/contrib/csrf/] #}
+            {% csrf_token %}
+
+            {# We passed in a RecordingForm() object #}
+            {# non_field_errors(): errors not associated with a particular field, including ValidationErrors #}
+            <p>{{ form.non_field_errors }}</p>
+
+            {# The RecordingForm as a @audiofile[FileField] #}
+            {# It also has a label='string', which will be printed by label_tag #}
+            {# It doesn't (but could) have help_text (in the constructor) #}
+            <p>{{ form.audiofile.label_tag }} {{ form.audiofile.help_text }}</p>
+            <p>
+                {# I think errors will contain validation errors #}
+                {{ form.audiofile.errors }}
+                {{ form.audiofile }}
+            </p>
+            {# `value="Upload"` sets the text that goes on the button #}
+            <p><input type="submit" value="Upload" /></p>
+        </form>
+        <a href="{% url 'users:wit_games' %}">Go to the record page</a>
+        <script>
+            // alert("something")
+        </script>
+    </body>
+</html>

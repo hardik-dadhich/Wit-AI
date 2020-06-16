@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "959ff7c8e0920645d89c28b54e7fda85b512edb3e5f0e445dd38c966e3b2e283"
+            "sha256": "09dcdfe969f055d3258e11dfbf6857e0e66e53ef71dddc890a75010d9e6c8aa6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -55,6 +55,14 @@
             "index": "pypi",
             "version": "==1.5.2"
         },
+        "beautifulsoup4": {
+            "hashes": [
+                "sha256:73cc4d115b96f79c7d77c1c7f7a0a8d4c57860d1041df407dd1aae7f07a77fd7",
+                "sha256:a6237df3c32ccfaee4fd201c8f5f9d9df619b93121d01353a64a73ce8c6ef9a8",
+                "sha256:e718f2342e2e099b640a34ab782407b7b676f47ee272d6739e60b8ea23829f2c"
+            ],
+            "version": "==4.9.1"
+        },
         "black": {
             "hashes": [
                 "sha256:1b30e59be925fafc1ee4565e5e08abef6b03fe455102883820fe5ee2e4734e0b",
@@ -65,10 +73,10 @@
         },
         "certifi": {
             "hashes": [
-                "sha256:1d987a998c75633c40847cc966fcf5904906c920a7f17ef374f5aa4282abd304",
-                "sha256:51fcb31174be6e6664c5f69e3e1691a2d72a1a12e90f872cbdb1567eb47b6519"
+                "sha256:5ad7e9a056d25ffa5082862e36f119f7f7cec6457fa07ee2f8c339814b80c9b1",
+                "sha256:9cd41137dc19af6a5e03b630eefe7d1f458d964d406342dd3edf625839b944cc"
             ],
-            "version": "==2020.4.5.1"
+            "version": "==2020.4.5.2"
         },
         "cffi": {
             "hashes": [
@@ -158,6 +166,10 @@
             "index": "pypi",
             "version": "==3.1a1"
         },
+        "django-audio-recorder": {
+            "git": "https://github.com/voxy/django-audio-recorder.git",
+            "ref": "a03e1d3063afff4bb07f06538a06a6934b7c5bf4"
+        },
         "flake8": {
             "hashes": [
                 "sha256:c69ac1668e434d37a2d2880b3ca9aafd54b3a10a3ac1ab101d22f29e29cf8634",
@@ -165,6 +177,21 @@
             ],
             "index": "pypi",
             "version": "==3.8.2"
+        },
+        "gtts": {
+            "hashes": [
+                "sha256:2ca2e880b560767d4ec74281d996ffdeda9012abc99968595b615e309a90cffe",
+                "sha256:e07e1729ca6d26c46d687bc29c321079a90719e1edb1ac25e0c229cd55b44539",
+                "sha256:feaebc9cf64138d68a05b965f2cdb9ea8ee962bbb8237d91c621bf910fc1123c"
+            ],
+            "index": "pypi",
+            "version": "==2.1.1"
+        },
+        "gtts-token": {
+            "hashes": [
+                "sha256:9d6819a85b813f235397ef931ad4b680f03d843c9b2a9e74dd95175a4bc012c5"
+            ],
+            "version": "==1.1.3"
         },
         "idna": {
             "hashes": [
@@ -224,6 +251,14 @@
             "index": "pypi",
             "version": "==0.6.1"
         },
+        "mpyg321": {
+            "hashes": [
+                "sha256:dad6d46fd2da0809ad590e2e76492619795651c7b8d29d87ccad648b0445628a",
+                "sha256:f328e999d8df83b1208803fc50ba96083bc8a2536f66e8a6ed61b8ab0ee5779e"
+            ],
+            "index": "pypi",
+            "version": "==0.0.2"
+        },
         "oauthlib": {
             "hashes": [
                 "sha256:bee41cc35fcca6e988463cacc3bcb8a96224f470ca547e697b604cc697b2f889",
@@ -238,6 +273,28 @@
             ],
             "index": "pypi",
             "version": "==0.8.0"
+        },
+        "prompt-toolkit": {
+            "hashes": [
+                "sha256:563d1a4140b63ff9dd587bda9557cffb2fe73650205ab6f4383092fb882e7dc8",
+                "sha256:df7e9e63aea609b1da3a65641ceaf5bc7d05e0a04de5bd45d05dbeffbabf9e04"
+            ],
+            "version": "==3.0.5"
+        },
+        "pyaudio": {
+            "hashes": [
+                "sha256:0d92f6a294565260a282f7c9a0b0d309fc8cc988b5ee5b50645634ab9e2da7f7",
+                "sha256:259bb9c1363be895b4f9a97e320a6017dd06bc540728c1a04eb4a7b6fe75035b",
+                "sha256:2a19bdb8ec1445b4f3e4b7b109e0e4cec1fd1f1ce588592aeb6db0b58d4fb3b0",
+                "sha256:51b558d1b28c68437b53218279110db44f69f3f5dd3d81859f569a4a96962bdc",
+                "sha256:589bfad2c615dd4b5d3757e763019c42ab82f06fba5cae64ec02fd7f5ae407ed",
+                "sha256:8f89075b4844ea94dde0c951c2937581c989fabd4df09bfd3f075035f50955df",
+                "sha256:93bfde30e0b64e63a46f2fd77e85c41fd51182a4a3413d9edfaf9ffaa26efb74",
+                "sha256:cf1543ba50bd44ac0d0ab5c035bb9c3127eb76047ff12235149d9adf86f532b6",
+                "sha256:f78d543a98b730e64621ebf7f3e2868a79ade0a373882ef51c0293455ffa8e6e"
+            ],
+            "index": "pypi",
+            "version": "==0.2.11"
         },
         "pycodestyle": {
             "hashes": [
@@ -351,12 +408,12 @@
         },
         "social-auth-app-django": {
             "hashes": [
-                "sha256:6d0dd18c2d9e71ca545097d57b44d26f59e624a12833078e8e52f91baf849778",
-                "sha256:9237e3d7b6f6f59494c3b02e0cce6efc69c9d33ad9d1a064e3b2318bcbe89ae3",
-                "sha256:f151396e5b16e2eee12cd2e211004257826ece24fc4ae97a147df386c1cd7082"
+                "sha256:02b561e175d4a93896e4436b591586b61e647bd8eeef14c99a26344eb3b48d0e",
+                "sha256:09575f5c7dd91465df3a898c58e7c4ae1e78f31edba36b8b7be47ab0aeef2789",
+                "sha256:47d1720115a9eaad78a67e99987d556abaa01222b9c2b9538182bbdbb10304ba"
             ],
             "index": "pypi",
-            "version": "==3.1.0"
+            "version": "==3.4.0"
         },
         "social-auth-core": {
             "hashes": [
@@ -365,6 +422,13 @@
                 "sha256:4a3cdf69c449b235cdabd54a1be7ba3722611297e69fded52e3584b1a990af25"
             ],
             "version": "==3.3.3"
+        },
+        "soupsieve": {
+            "hashes": [
+                "sha256:1634eea42ab371d3d346309b93df7870a88610f0725d47528be902a0d95ecc55",
+                "sha256:a59dc181727e95d25f781f0eb4fd1825ff45590ec8ff49eadfd7f1a537cc0232"
+            ],
+            "version": "==2.0.1"
         },
         "sqlparse": {
             "hashes": [
@@ -415,6 +479,20 @@
                 "sha256:88206b0eb87e6d677d424843ac5209e3fb9d0190d0ee169599165ec25e9d9115"
             ],
             "version": "==1.25.9"
+        },
+        "wcwidth": {
+            "hashes": [
+                "sha256:79375666b9954d4a1a10739315816324c3e73110af9d0e102d906fdb0aec009f",
+                "sha256:8c6b5b6ee1360b842645f336d9e5d68c55817c26d3050f46b235ef2bc650e48f"
+            ],
+            "version": "==0.2.4"
+        },
+        "wit": {
+            "hashes": [
+                "sha256:153b8ac147ee0cacae2a8776bf6d87d045c48e46ff0b4eb00acd6967d5183578"
+            ],
+            "index": "pypi",
+            "version": "==6.0.0"
         },
         "wrapt": {
             "hashes": [
