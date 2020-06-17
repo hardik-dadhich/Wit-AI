@@ -146,7 +146,7 @@ def findPeople(request):
         friends_name = [i['name'] for i in data['users']]
         total_friends = len(friends_name)
 
-        # user_desciption = data['description']
+        # /user_desciption = data['description']
 
         return render(request, "users/meetfriends.html", {'friends_name': friends_name, 'user': username, 'total_friends': total_friends})
     else:
