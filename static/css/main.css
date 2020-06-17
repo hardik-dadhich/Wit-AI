@@ -3,17 +3,17 @@
 
 @font-face {
     font-family: Oswald-Regular;
-    src: url('../fonts/oswald/Oswald-Regular.ttf');
+    src: url("../fonts/oswald/Oswald-Regular.ttf");
 }
 
 @font-face {
     font-family: Oswald-Medium;
-    src: url('../fonts/oswald/Oswald-Medium.ttf');
+    src: url("../fonts/oswald/Oswald-Medium.ttf");
 }
 
 @font-face {
     font-family: Oswald-Bold;
-    src: url('../fonts/oswald/Oswald-Bold.ttf');
+    src: url("../fonts/oswald/Oswald-Bold.ttf");
 }
 
 
@@ -30,6 +30,11 @@ body,
 html {
     height: 100%;
     font-family: Oswald-Regular, sans-serif;
+}
+
+.navbar {
+    height: 80px;
+    background-color: #35719c;
 }
 
 
@@ -518,6 +523,6 @@ iframe {
 
 @media (max-width: 576px) {
     .wrap-login100 {
-        padding-top: 20px
+        padding-top: 20px;
     }
 }
