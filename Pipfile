@@ -42,6 +42,7 @@ pyaudio = "*"
 django-audio-recorder = {git = "https://github.com/voxy/django-audio-recorder.git"}
 gtts = "*"
 mpyg321 = "*"
+lxml = "*"
 
 [requires]
 python_version = "3.7"
