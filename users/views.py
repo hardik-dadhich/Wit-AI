@@ -12,6 +12,8 @@ from .forms import RecordingForm
 
 from configparser import ConfigParser
 from gtts import gTTS
+import bs4
+from bs4 import BeautifulSoup
 import json
 import os
 import requests
@@ -173,16 +175,96 @@ def RecognizeSpeech(AUDIO_FILENAME, num_seconds=5):
 
 
 @ login_required
-# def games(request):
-#     return render(request, "users/games.html", {})
-@ login_required
 def movies(request):
-    return render(request, "users/movies.html", {})
+    if request.method == 'POST':
+        # rec = Recording.objects.all()[0]
+        rec = Recording.objects.order_by('-pk')[0]
+        print("yeh", rec)
+        asked_question = RecognizeSpeech(f'media/recordings/{rec}.wav', 4)
+        print("final :", asked_question)
+        intent = ''
+        if 'text' not in asked_question:
+            intent = "Not_sure"
+        else:
+            text = asked_question['text']
+            print("\nYou said: {}".format(text))
+
+            if asked_question['intents']:
+                intent = asked_question['intents'][0]['name']
+            else:
+                intent = 'Not_trained'
+
+        print("\nIntent is: {}".format(intent))
+
+        # calling return answer funtion
+        answer_dict = {'get_top_hollywood_movies':['The Godfather','The Shawshank Redemption','The Lord of the Rings'],
+                    'get_top_bollywood_movies':['3 Idiots','Andhadhun','Dangal'], 
+                    'get_marvel_movies':['Avengers Endgame','Captain Marvel', 'Black Panther'],
+                    'Not_trained':['We are not trained on this'],'Not_sure': ['Not sure what you want to say']
+                        }
+
+        ReturnAnswer(intent, answer_dict)
+
+        form = RecordingForm(request.POST, request.FILES)
+        if form.is_valid():
+            newrec = Recording(audiofile=request.FILES['recording'])
+            newrec.save()
+            return HttpResponseRedirect(reverse('users:lists'))
+    else:
+        form = RecordingForm()
+
+    return render(
+        request,
+        'users/movies.html',
+        {'form': form},
+    )
+
 
 
 @ login_required
 def music(request):
-    return render(request, "users/music.html", {})
+    if request.method == 'POST':
+        # rec = Recording.objects.all()[0]
+        rec = Recording.objects.order_by('-pk')[0]
+        print("yeh", rec)
+        asked_question = RecognizeSpeech(f'media/recordings/{rec}.wav', 4)
+        print("final :", asked_question)
+        intent = ''
+        if 'text' not in asked_question:
+            intent = "Not_sure"
+        else:
+            text = asked_question['text']
+            print("\nYou said: {}".format(text))
+
+            if asked_question['intents']:
+                intent = asked_question['intents'][0]['name']
+            else:
+                intent = 'Not_trained'
+
+        print("\nIntent is: {}".format(intent))
+
+        # calling return answer funtion
+        answer_dict = {'get_top_songs_this_year':['Blinding lights','Dance Monkey'],'get_music_catagories':['Hip Hop','Rock','Pop'],
+        'get_pop_singer':['Beyonce','Taylor Swift'],'get_top_indian_artists':['A R Rehman','Lata Mangeshkar'],
+        'get_most_liked_music_video':['Despacito'],'Not_trained':['We are not trained on this'],'Not_sure': ['Not sure what you want to say']
+            }
+
+        ReturnAnswer(intent, answer_dict)
+
+        form = RecordingForm(request.POST, request.FILES)
+        if form.is_valid():
+            newrec = Recording(audiofile=request.FILES['recording'])
+            newrec.save()
+            return HttpResponseRedirect(reverse('users:lists'))
+    else:
+        form = RecordingForm()
+
+    return render(
+        request,
+        'users/music.html',
+        {'form': form},
+    )
+
 
 
 @ login_required
@@ -195,22 +277,78 @@ def social(request):
     return render(request, "users/social.html", {})
 
 
-@ login_required
-def sports(view):
-    def helper(request, **kwargs):
-        if request.method == 'POST':
-            print("good ")
+
+def sports(request):
+    if request.method == 'POST':
+        # rec = Recording.objects.all()[0]
+        rec = Recording.objects.order_by('-pk')[0]
+        print("yeh", rec)
+        asked_question = RecognizeSpeech(f'media/recordings/{rec}.wav', 4)
+        print("final :", asked_question)
+        intent = ''
+        if 'text' not in asked_question:
+            intent = "Not_sure"
         else:
-            response = view(request, "users/sports.html", {})
+            text = asked_question['text']
+            print("\nYou said: {}".format(text))
 
-            answer_dict = {'best_cricket_player_india': ['Sachin'], 'best_batsman_world': ['Steve Smith'],
-                           'best_footballer': ['Lionel Messi'], 'best_football_club': ['Football Club Barcelona'],
-                           'Not_trained': ['We are not trained on this'], }
+            if asked_question['intents']:
+                intent = asked_question['intents'][0]['name']
+            else:
+                intent = 'Not_trained'
 
-            data = RecognizeSpeech('myspeech.wav', 4)
-            text = data['text']
-            return response
-    return helper
+        print("\nIntent is: {}".format(intent))
+
+        # calling return answer funtion
+        answer_dict = {'get_apple_stock_price':'https://finance.yahoo.com/quote/AAPL?p=AAPL&.tsrc=fin-srch',
+                      'get_facebook_stock_price':'https://finance.yahoo.com/quote/FB?p=FB&.tsrc=fin-srch',
+                      'get_walmart_stock_price':'https://finance.yahoo.com/quote/WMT?p=WMT&.tsrc=fin-srch',
+                      'get_microsoft_stock_price':'https://finance.yahoo.com/quote/MSFT?p=MSFT&.tsrc=fin-srch',
+                     'get_twitter_stock_price':'https://finance.yahoo.com/quote/TWTR?p=TWTR&.tsrc=fin-srch',
+                      'get_amazon_stock_price':'https://finance.yahoo.com/quote/AMZN?p=AMZN&.tsrc=fin-srch',
+                     'Not_trained':'We are not trained on this','Not_sure':'You did not said anything'}
+        ReturnStockPrice(intent, answer_dict)
+
+        form = RecordingForm(request.POST, request.FILES)
+        if form.is_valid():
+            newrec = Recording(audiofile=request.FILES['recording'])
+            newrec.save()
+            return HttpResponseRedirect(reverse('users:lists'))
+    else:
+        form = RecordingForm()
+
+    return render(
+        request,
+        'users/sports.html',
+        {'form': form},
+    )
+
+def ReturnStockPrice(converted_text_intent, stored_result_dict):
+
+    if converted_text_intent == 'Not_trained':
+        text = stored_result_dict[converted_text_intent]
+    
+    elif converted_text_intent == 'Not_sure':
+        text = stored_result_dict[converted_text_intent]
+
+    else:
+        url = stored_result_dict[converted_text_intent]
+        response = requests.get(url)
+        #print("\nWit Response is: {}".format(response[0]))
+
+        soup = bs4.BeautifulSoup(response.text,"lxml")
+
+        text = soup.find_all('div',{'class': "My(6px) Pos(r) smartphone_Mt(6px)"})[0].find('span').text
+
+    language = 'en'
+
+    myobj = gTTS(text=text, lang=language, slow=False)
+
+    myobj.save("sample.mp3")
+
+    # Playing the converted file
+    os.system("mpg321 sample.mp3")
+    
 
 
 def list_to_Save(request):
@@ -260,7 +398,7 @@ def games(request):
 
         # calling return answer funtion
         answer_dict = {'get_cricket_player_india': ['Sachin'], 'get_best_batsman_world': ['Steve Smith'], 'get_football_player': ['Lionel Messi', 'Cristiano Ronaldo'], 'get_football_clubs': [
-            'Football Club Barcelona', 'Real Madrid', 'Liverpool'], 'get_football_teams': ['Belgium', 'France', 'Brazil'], 'get_top_sports_world': ['Soccer/Football', 'Cricket', 'Basketball'], 'Not_trained': ['We are not trained on this'], 'Not_sure': ['Not sure whhat you want to say']}
+            'Football Club Barcelona', 'Real Madrid', 'Liverpool'], 'get_football_teams': ['Belgium', 'France', 'Brazil'], 'get_top_sports_world': ['Soccer/Football', 'Cricket', 'Basketball'], 'Not_trained': ['We are not trained on this'], 'Not_sure': ['Not sure what you want to say']}
         ReturnAnswer(intent, answer_dict)
 
         form = RecordingForm(request.POST, request.FILES)
