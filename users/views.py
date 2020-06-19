@@ -195,7 +195,7 @@ def movies(request):
         print("\nIntent is: {}".format(intent))
 
         # calling return answer funtion
-
+        
         ReturnAnswer(intent, answer_dict)
 
         form = RecordingForm(request.POST, request.FILES)
@@ -204,8 +204,9 @@ def movies(request):
             newrec.save()
             return HttpResponseRedirect(reverse('users:lists'))
     else:
-
         form = RecordingForm()
+
+    
     context = list(answer_dict.keys())[:-1]
     friends_ = list(friends_catagory_dict['politics'])
     friends_2 = list(friends_catagory_dict['celebrities'])
@@ -246,6 +247,7 @@ def music(request):
         print("\nIntent is: {}".format(intent))
 
         # calling return answer funtion
+
         ReturnAnswer(intent, answer_dict)
 
         form = RecordingForm(request.POST, request.FILES)
@@ -255,6 +257,7 @@ def music(request):
             return HttpResponseRedirect(reverse('users:lists'))
     else:
         form = RecordingForm()
+
     context = list(answer_dict.keys())[:-1]
     friends_ = list(friends_catagory_dict['funny'])
     friends_2 = list(friends_catagory_dict['celebrities'])
@@ -277,6 +280,10 @@ def news(request):
 def social(request):
     return render(request, "users/social.html", {})
 
+
+
+def sports(request):
+    pass
 
 def stock(request):
     answer_dict = {'get_apple_stock_price': 'https://finance.yahoo.com/quote/AAPL?p=AAPL&.tsrc=fin-srch',
@@ -331,6 +338,7 @@ def ReturnStockPrice(converted_text_intent, stored_result_dict):
 
     if converted_text_intent == 'Not_trained':
         text = stored_result_dict[converted_text_intent]
+    
 
     elif converted_text_intent == 'Not_sure':
         text = stored_result_dict[converted_text_intent]
@@ -338,6 +346,11 @@ def ReturnStockPrice(converted_text_intent, stored_result_dict):
     else:
         url = stored_result_dict[converted_text_intent]
         response = requests.get(url)
+        #print("\nWit Response is: {}".format(response[0]))
+
+        soup = bs4.BeautifulSoup(response.text,"lxml")
+
+        text = soup.find_all('div',{'class': "My(6px) Pos(r) smartphone_Mt(6px)"})[0].find('span').text
         # print("\nWit Response is: {}".format(response[0]))
 
         soup = bs4.BeautifulSoup(response.text, "lxml")
@@ -353,6 +366,7 @@ def ReturnStockPrice(converted_text_intent, stored_result_dict):
 
     # Playing the converted file
     os.system("mpg321 sample.mp3")
+    
 
 
 def list_to_Save(request):
