@@ -195,12 +195,7 @@ def movies(request):
         print("\nIntent is: {}".format(intent))
 
         # calling return answer funtion
-        answer_dict = {'get_top_hollywood_movies':['The Godfather','The Shawshank Redemption','The Lord of the Rings'],
-                    'get_top_bollywood_movies':['3 Idiots','Andhadhun','Dangal'], 
-                    'get_marvel_movies':['Avengers Endgame','Captain Marvel', 'Black Panther'],
-                    'Not_trained':['We are not trained on this'],'Not_sure': ['Not sure what you want to say']
-                        }
-
+        
         ReturnAnswer(intent, answer_dict)
 
         form = RecordingForm(request.POST, request.FILES)
@@ -259,10 +254,6 @@ def music(request):
         print("\nIntent is: {}".format(intent))
 
         # calling return answer funtion
-        answer_dict = {'get_top_songs_this_year':['Blinding lights','Dance Monkey'],'get_music_catagories':['Hip Hop','Rock','Pop'],
-        'get_pop_singer':['Beyonce','Taylor Swift'],'get_top_indian_artists':['A R Rehman','Lata Mangeshkar'],
-        'get_most_liked_music_video':['Despacito'],'Not_trained':['We are not trained on this'],'Not_sure': ['Not sure what you want to say']
-            }
 
         ReturnAnswer(intent, answer_dict)
 
@@ -304,7 +295,8 @@ def social(request):
 
 
 
-#def sports(request):
+def sports(request):
+    pass
 
 def stock(request):
     answer_dict = {'get_apple_stock_price': 'https://finance.yahoo.com/quote/AAPL?p=AAPL&.tsrc=fin-srch',
@@ -438,8 +430,6 @@ def games(request):
         print("\nIntent is: {}".format(intent))
 
         # calling return answer funtion
-        answer_dict = {'get_cricket_player_india': ['Sachin'], 'get_best_batsman_world': ['Steve Smith'], 'get_football_player': ['Lionel Messi', 'Cristiano Ronaldo'], 'get_football_clubs': [
-            'Football Club Barcelona', 'Real Madrid', 'Liverpool'], 'get_football_teams': ['Belgium', 'France', 'Brazil'], 'get_top_sports_world': ['Soccer/Football', 'Cricket', 'Basketball'], 'Not_trained': ['We are not trained on this'], 'Not_sure': ['Not sure what you want to say']}
         ReturnAnswer(intent, answer_dict)
 
         form = RecordingForm(request.POST, request.FILES)
