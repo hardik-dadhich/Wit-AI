@@ -28,8 +28,10 @@ config.read('./settings.ini')
 API_ENDPOINT = config.get("settings", 'API_ENDPOINT')
 wit_access_token = config.get("settings", 'WIT_ACCESS_TOKEN')
 
+CLICKED_FRIEND = False
 
 # Create your views here.
+
 
 def record_audio(RECORD_SECONDS, WAVE_OUTPUT_FILENAME):
     #--------- SETTING PARAMS FOR OUR AUDIO FILE ------------#
@@ -126,14 +128,6 @@ def get_token():
     return key
 
 
-# def get_user_type():
-#      headers = {'authorization': 'Bearer ' + wit_access_token,
-#                'Content-Type': 'audio/wav'}
-
-#     # making an HTTP post request
-#     resp = requests.post(API_ENDPOINT, headers=headers,
-#                          data=)
-
 @login_required
 def findPeople(request):
     keys = get_token()
@@ -146,10 +140,9 @@ def findPeople(request):
     data = response.json()
     if 'users' in data:
         friends_name = [i['name'] for i in data['users']]
+        friends_descrpitions = [dec['description'] for dec in data['users']]
         total_friends = len(friends_name)
-
-        # user_desciption = data['description']
-
+        classification_of_friends(request, friends_descrpitions, friends_name)
         return render(request, "users/meetfriends.html", {'friends_name': friends_name, 'user': username, 'total_friends': total_friends})
     else:
         return render(request, "users/meetfriends.html", {'friends_name': "NO USER FRIEND", 'user': username, 'total_friends': 0})
@@ -176,6 +169,11 @@ def RecognizeSpeech(AUDIO_FILENAME, num_seconds=5):
 
 @ login_required
 def movies(request):
+    answer_dict = {'get_top_hollywood_movies': ['The Godfather', 'The Shawshank Redemption', 'The Lord of the Rings'],
+                   'get_top_bollywood_movies': ['3 Idiots', 'Andhadhun', 'Dangal'],
+                   'get_marvel_movies': ['Avengers Endgame', 'Captain Marvel', 'Black Panther'],
+                   'Not_trained': ['We are not trained on this'], 'Not_sure': ['Not sure what you want to say']
+                   }
     if request.method == 'POST':
         # rec = Recording.objects.all()[0]
         rec = Recording.objects.order_by('-pk')[0]
@@ -220,9 +218,26 @@ def movies(request):
     )
 
 
+    form = RecordingForm()
+    context = list(answer_dict.keys())[:-1]
+    friends_ = list(friends_catagory_dict['politics'])
+    friends_2 = list(friends_catagory_dict['celebrities'])
+    recommended_friends = friends_ + friends_2
+    clicked_ = request.session.get('CLICKED_FRIEND')
+    return render(
+        request,
+        'users/movies.html',
+        {'form': form, 'questions': context,
+            'recommended_people': recommended_friends, 'check_button': clicked_},
+    )
+
 
 @ login_required
 def music(request):
+    answer_dict = {'get_top_songs_this_year': ['Blinding lights', 'Dance Monkey'], 'get_music_catagories': ['Hip Hop', 'Rock', 'Pop'],
+                   'get_pop_singer': ['Beyonce', 'Taylor Swift'], 'get_top_indian_artists': ['A R Rehman', 'Lata Mangeshkar'],
+                   'get_most_liked_music_video': ['Despacito'], 'Not_trained': ['We are not trained on this'], 'Not_sure': ['Not sure what you want to say']
+                   }
     if request.method == 'POST':
         # rec = Recording.objects.all()[0]
         rec = Recording.objects.order_by('-pk')[0]
@@ -265,6 +280,17 @@ def music(request):
         {'form': form},
     )
 
+    context = list(answer_dict.keys())[:-1]
+    friends_ = list(friends_catagory_dict['funny'])
+    friends_2 = list(friends_catagory_dict['celebrities'])
+    recommended_friends = friends_ + friends_2
+    clicked_ = request.session.get('CLICKED_FRIEND')
+    return render(
+        request,
+        'users/music.html',
+        {'form': form, 'questions': context,
+            'recommended_people': recommended_friends, 'check_button': clicked_},
+    )
 
 
 @ login_required
@@ -278,7 +304,16 @@ def social(request):
 
 
 
-def sports(request):
+#def sports(request):
+
+def stock(request):
+    answer_dict = {'get_apple_stock_price': 'https://finance.yahoo.com/quote/AAPL?p=AAPL&.tsrc=fin-srch',
+                   'get_facebook_stock_price': 'https://finance.yahoo.com/quote/FB?p=FB&.tsrc=fin-srch',
+                   'get_walmart_stock_price': 'https://finance.yahoo.com/quote/WMT?p=WMT&.tsrc=fin-srch',
+                   'get_microsoft_stock_price': 'https://finance.yahoo.com/quote/MSFT?p=MSFT&.tsrc=fin-srch',
+                   'get_twitter_stock_price': 'https://finance.yahoo.com/quote/TWTR?p=TWTR&.tsrc=fin-srch',
+                   'get_amazon_stock_price': 'https://finance.yahoo.com/quote/AMZN?p=AMZN&.tsrc=fin-srch',
+                   'Not_trained': 'We are not trained on this', 'Not_sure': 'You did not said anything'}
     if request.method == 'POST':
         # rec = Recording.objects.all()[0]
         rec = Recording.objects.order_by('-pk')[0]
@@ -300,13 +335,6 @@ def sports(request):
         print("\nIntent is: {}".format(intent))
 
         # calling return answer funtion
-        answer_dict = {'get_apple_stock_price':'https://finance.yahoo.com/quote/AAPL?p=AAPL&.tsrc=fin-srch',
-                      'get_facebook_stock_price':'https://finance.yahoo.com/quote/FB?p=FB&.tsrc=fin-srch',
-                      'get_walmart_stock_price':'https://finance.yahoo.com/quote/WMT?p=WMT&.tsrc=fin-srch',
-                      'get_microsoft_stock_price':'https://finance.yahoo.com/quote/MSFT?p=MSFT&.tsrc=fin-srch',
-                     'get_twitter_stock_price':'https://finance.yahoo.com/quote/TWTR?p=TWTR&.tsrc=fin-srch',
-                      'get_amazon_stock_price':'https://finance.yahoo.com/quote/AMZN?p=AMZN&.tsrc=fin-srch',
-                     'Not_trained':'We are not trained on this','Not_sure':'You did not said anything'}
         ReturnStockPrice(intent, answer_dict)
 
         form = RecordingForm(request.POST, request.FILES)
@@ -316,18 +344,23 @@ def sports(request):
             return HttpResponseRedirect(reverse('users:lists'))
     else:
         form = RecordingForm()
-
+    context = list(answer_dict.keys())[:-1]
+    recommended_friends = friends_catagory_dict['technical']
+    clicked_ = request.session.get('CLICKED_FRIEND')
     return render(
         request,
         'users/sports.html',
-        {'form': form},
+        {'form': form, 'questions': context,
+            'recommended_people': recommended_friends, 'check_button': clicked_},
     )
+
 
 def ReturnStockPrice(converted_text_intent, stored_result_dict):
 
     if converted_text_intent == 'Not_trained':
         text = stored_result_dict[converted_text_intent]
     
+
     elif converted_text_intent == 'Not_sure':
         text = stored_result_dict[converted_text_intent]
 
@@ -339,6 +372,12 @@ def ReturnStockPrice(converted_text_intent, stored_result_dict):
         soup = bs4.BeautifulSoup(response.text,"lxml")
 
         text = soup.find_all('div',{'class': "My(6px) Pos(r) smartphone_Mt(6px)"})[0].find('span').text
+        # print("\nWit Response is: {}".format(response[0]))
+
+        soup = bs4.BeautifulSoup(response.text, "lxml")
+
+        text = soup.find_all('div', {'class': "My(6px) Pos(r) smartphone_Mt(6px)"})[
+            0].find('span').text
 
     language = 'en'
 
@@ -376,6 +415,8 @@ def list_to_Save(request):
 
 
 def games(request):
+    answer_dict = {'get_cricket_player_india': ['Sachin'], 'get_best_batsman_world': ['Steve Smith'], 'get_football_player': ['Lionel Messi', 'Cristiano Ronaldo'], 'get_football_clubs': [
+        'Football Club Barcelona', 'Real Madrid', 'Liverpool'], 'get_football_teams': ['Belgium', 'France', 'Brazil'], 'get_top_sports_world': ['Soccer/Football', 'Cricket', 'Basketball'], 'Not_trained': ['We are not trained on this'], 'Not_sure': ['Not sure what you want to say']}
     if request.method == 'POST':
         # rec = Recording.objects.all()[0]
         rec = Recording.objects.order_by('-pk')[0]
@@ -408,11 +449,14 @@ def games(request):
             return HttpResponseRedirect(reverse('users:lists'))
     else:
         form = RecordingForm()
-
+    context = list(answer_dict.keys())[:-1]
+    recommended_friends = friends_catagory_dict['sports']
+    clicked_ = request.session.get('CLICKED_FRIEND')
     return render(
         request,
         'users/games.html',
-        {'form': form},
+        {'form': form, 'questions': context, 'check_button': clicked_,
+            'recommended_people': recommended_friends},
     )
 
 
@@ -422,7 +466,10 @@ def ReturnAnswer(converted_text_intent, stored_result_dict):
 
     print("\nWit Response is: {}".format(response[0]))
 
-    text = response[0]
+    text = ''
+    for i in response[:-1]:
+        text += i + ' '
+    text += 'and ' + response[-1]
     language = 'en'
 
     myobj = gTTS(text=text, lang=language, slow=False)
@@ -431,3 +478,36 @@ def ReturnAnswer(converted_text_intent, stored_result_dict):
 
     # Playing the converted file
     os.system("mpg321 sample.mp3")
+
+
+friends_catagory_dict = {'funny': [], 'sports': [],
+                         'technical': [], 'politics': [], 'celebrities': [], 'others': []}
+# classfication of followrs on the bases of bio:
+
+
+def classification_of_friends(request, bio_list, friends_list):
+    request.session['CLICKED_FRIEND'] = True
+    for index, bio in enumerate(bio_list):
+        bio = bio.lower()
+        catagories_dict = {'funny': ['comedy', 'comedian', 'parody', 'jokes'],
+
+                           'sports': ['cricketer', 'cricket', 'football', 'footballer', 'player'],
+
+                           'technical': ['research', 'software', 'engineering', 'engineer', 'developer', 'corporate'],
+
+                           'politics': ['politics', 'bjp', 'congress', 'politician', 'prime minister', 'minister'],
+
+                           'celebrities': ['actor', 'actress', 'artist', 'youtuber', 'model']
+                           }
+        res = ''
+        for i in catagories_dict:
+            for j in catagories_dict[i]:
+                if j in bio:
+                    res = i
+                    break
+
+        if len(res) > 0:
+            friends_catagory_dict[res].append(friends_list[index])
+        else:
+            friends_catagory_dict['others'].append(friends_list[index])
+    print(friends_catagory_dict)
