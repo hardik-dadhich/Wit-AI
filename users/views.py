@@ -206,14 +206,7 @@ def movies(request):
     else:
         form = RecordingForm()
 
-    return render(
-        request,
-        'users/movies.html',
-        {'form': form},
-    )
-
-
-    form = RecordingForm()
+    
     context = list(answer_dict.keys())[:-1]
     friends_ = list(friends_catagory_dict['politics'])
     friends_2 = list(friends_catagory_dict['celebrities'])
@@ -264,12 +257,6 @@ def music(request):
             return HttpResponseRedirect(reverse('users:lists'))
     else:
         form = RecordingForm()
-
-    return render(
-        request,
-        'users/music.html',
-        {'form': form},
-    )
 
     context = list(answer_dict.keys())[:-1]
     friends_ = list(friends_catagory_dict['funny'])
