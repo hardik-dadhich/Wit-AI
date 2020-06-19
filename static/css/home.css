@@ -1,70 +1,76 @@
-.navbar{
+.navbar {
     height: 80px;
     background-color: #35719c;
 }
 
-body{
-    background-color: #78dec9;
+body {
+    background-color: #e4ebe9;
 }
 
-
-.navbar img{
+.navbar img {
     width: 40px;
-    height: 40px
+    height: 40px;
 }
 
-.card img{
+.card img {
     height: 250px;
-    width: 100%
-
+    width: 100%;
 }
 
 .row {
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-top: 20px;
-	margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .col {
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-top: 20px;
-	margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
-.card { 
-    background-color: #ffffff; 
-    width: 250px; 
-    height: 250px; 
-    perspective: 1000px; 
-} 
-.card h3{
-	text-align: center;
+
+.card {
+    background-color: #ffffff;
+    width: 250px;
+    height: 250px;
+    perspective: 1000px;
 }
-.card-inner { 
-    position: relative; 
-    width: 100%; 
-    height: 100%; 
-    text-align: center; 
-    transition: transform 0.6s; 
-    transform-style: preserve-3d; 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
-} 
-.card:hover .card-inner { 
-    transform: rotateY(180deg); 
-} 
-.card-front, .card-back { 
-    position: absolute; 
-    width: 100%; 
-    height: 100%; 
-    backface-visibility: hidden; 
-} 
-.card-front { 
-    background-color: #bbb; 
-    color: black; 
-} 
-.card-back { 
-    background-color: #98f5ea; 
+
+.card h3 {
+    text-align: center;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.card-front {
+    background-color: #bbb;
+    color: black;
+}
+
+.card-back {
+    background-color: #98f5ea;
     transform: rotateY(180deg);
     font-size: 40px;
 }
